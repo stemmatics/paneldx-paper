@@ -1,0 +1,12 @@
+*.xlsx
+*.xls
+*.csv
+*.parquet
+data/
+__pycache__/
+.venv/
+venv/
+.DS_Store
+.DS_Store
+
+manuscript-reading-copy.html

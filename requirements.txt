@@ -1,0 +1,6 @@
+paneldx==0.3.1
+pandas>=1.3
+numpy>=1.21
+scikit-learn>=1.0
+lightgbm>=4.0
+openpyxl>=3.0
