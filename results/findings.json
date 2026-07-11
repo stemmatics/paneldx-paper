@@ -1,0 +1,148 @@
+{
+  "dataset": {
+    "rows": 24000,
+    "columns": 39,
+    "periods": 4,
+    "disease_areas": 4,
+    "rows_missing_opening_time": 7148
+  },
+  "corrected_panel": {
+    "physicians": 4035,
+    "rows": 16140,
+    "retained_fraction": 0.6725
+  },
+  "defects": {
+    "positional_key": {
+      "evidence_frac": 0.06666666666666667,
+      "columns_explained": 2,
+      "columns_tested": 30,
+      "verdict": "NOT SUPPORTED - within-entity quantities are unsafe",
+      "invariant_breach_rate": {
+        "Opening time": 0.9711666666666666,
+        "gender": 0.6611666666666667,
+        "Rank": 0.4771666666666667
+      }
+    },
+    "recovered_key": {
+      "evidence_frac": 0.4482758620689655,
+      "columns_explained": 13,
+      "columns_tested": 29,
+      "entities": 4210,
+      "coverage": 0.6992083333333333,
+      "verdict": "supported by the data",
+      "invariants": [
+        "gender",
+        "Rank",
+        "Smile intensity",
+        "Face credibility - non-standardized",
+        "Title ",
+        "Smile in Picture ",
+        "Smile - Baidu",
+        "Age - Baidu",
+        "Smile-tx",
+        "Age-tx"
+      ],
+      "counters": [
+        "Total patients",
+        "Total visits",
+        "Medical consultation records"
+      ]
+    },
+    "blind_discovery": [
+      {
+        "key": [
+          "Disease",
+          "Opening time"
+        ],
+        "evidence_frac": 0.4482758620689655,
+        "coverage": 0.6992083333333333
+      },
+      {
+        "key": [
+          "Disease",
+          "Face credibility - non-standardized"
+        ],
+        "evidence_frac": 0.4482758620689655,
+        "coverage": 0.4542083333333333
+      },
+      {
+        "key": [
+          "Opening time",
+          "Recommended order"
+        ],
+        "evidence_frac": 0.5517241379310345,
+        "coverage": 0.06720833333333333
+      }
+    ],
+    "counter_violation_rate": {
+      "positional": 0.46924466163816,
+      "recovered": 0.00962532813618646
+    },
+    "counters": {
+      "detected": [
+        "Serial number",
+        "Total patients",
+        "Total visits",
+        "Medical consultation records"
+      ],
+      "autocorrelation": {
+        "Serial number": 0.9905914120488934,
+        "Total patients": 0.9623912644348053,
+        "Total visits": 0.8712564996259761,
+        "Medical consultation records": 0.9605393285301325
+      }
+    },
+    "target_leakage": {
+      "r2": 0.9227857691375961,
+      "verdict": "SUSPECT - the target is largely reconstructible from its features. Check whether it was computed from them.",
+      "top_contributors": [
+        {
+          "feature": "inv_rank",
+          "weight": 0.47336707982334175
+        },
+        {
+          "feature": "log_gifts",
+          "weight": 0.32903716377955694
+        },
+        {
+          "feature": "log_visits",
+          "weight": 0.15289765900139773
+        },
+        {
+          "feature": "log_patients",
+          "weight": 0.0835243076364598
+        },
+        {
+          "feature": "article_engagement",
+          "weight": -0.016761734014964655
+        }
+      ]
+    }
+  },
+  "concealment": {
+    "under_positional_key": {
+      "mae": 0.4716989710753471,
+      "r2": 0.19077229489955383,
+      "autocorrelation": 0.5952896981831939,
+      "pairs": 18000
+    },
+    "under_recovered_key": {
+      "mae": 0.032039699091522246,
+      "r2": 0.9711700035072254,
+      "autocorrelation": 0.9855693613040207,
+      "pairs": 12571
+    },
+    "published_model_mae": 0.0942,
+    "published_model_worse_by": 2.9401025187819405
+  },
+  "satisfaction_task": {
+    "n": 4035,
+    "n_features": 26,
+    "target_sd": 0.38057923414130607,
+    "mean_baseline_mae": 0.26124673051321373,
+    "model_mae": 0.14689602218122477,
+    "model_r2": 0.7029278392381934,
+    "improvement_over_mean": 0.4377115384653787,
+    "validation": "GroupKFold by disease area; each fold scored on an unseen specialty"
+  }
+}
