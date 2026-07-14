@@ -69,10 +69,10 @@ def corrected_panel(df: pd.DataFrame) -> pd.DataFrame:
     return complete.sort_values(["pid", TIME_COL])
 
 
-def section_defects(df: pd.DataFrame) -> dict:
-    positional = validate_key(df, POSITIONAL_KEY, TIME_COL)
-    recovered = validate_key(df, RECOVERED_KEY, TIME_COL)
-    discovered = discover_keys(df, TIME_COL, max_columns=2, top_k=3)
+def section_defects(raw: pd.DataFrame, df: pd.DataFrame) -> dict:
+    positional = validate_key(raw, POSITIONAL_KEY, TIME_COL)
+    recovered = validate_key(raw, RECOVERED_KEY, TIME_COL)
+    discovered = discover_keys(raw, TIME_COL, max_columns=2, top_k=3)
 
     invariant_breaches = {
         column: float((df.groupby(POSITIONAL_KEY)[column].nunique(dropna=False) > 1).mean())
@@ -81,13 +81,13 @@ def section_defects(df: pd.DataFrame) -> dict:
 
     violation_rates = {}
     for label, key_cols in (("positional", [POSITIONAL_KEY]), ("recovered", RECOVERED_KEY)):
-        ordered = df.dropna(subset=key_cols).copy()
+        ordered = raw.dropna(subset=key_cols).copy()
         ordered["_e"] = ordered[key_cols].astype(str).agg("|".join, axis=1)
         ordered = ordered.sort_values(["_e", TIME_COL])
         steps = ordered.groupby("_e")["Total visits"].diff().dropna()
         violation_rates[label] = float((steps < 0).mean())
 
-    counters = detect_counters(df, RECOVERED_KEY, TIME_COL)
+    counters = detect_counters(raw, RECOVERED_KEY, TIME_COL)
     features = [
         "log_patients", "log_visits", "log_gifts",
         "gifts_per_visit", "inv_rank", "article_engagement",
@@ -157,6 +157,15 @@ def section_concealment(df: pd.DataFrame) -> dict:
 
 
 def section_satisfaction(panel: pd.DataFrame) -> dict:
+    panel = panel.copy()
+    panel["tenure_years"] = (
+        pd.Timestamp("2023-01-01") - pd.to_datetime(panel["Opening time"])
+    ).dt.days / 365.25
+    for source, flow in (("Total visits", "new_visits"),
+                         ("Total patients", "new_patients"),
+                         ("Total Gifts", "new_gifts")):
+        panel[flow] = panel.groupby("pid")[source].diff().clip(lower=0)
+
     final_period = panel[panel[TIME_COL] == panel[TIME_COL].max()].copy()
     final_period = final_period[final_period["Patient recommendation"].notna()]
 
@@ -212,7 +221,8 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    raw = add_published_variables(load(args.data))
+    raw_original = load(args.data)
+    raw = add_published_variables(raw_original)
     panel = corrected_panel(raw)
 
     findings = {
@@ -228,7 +238,7 @@ def main() -> None:
             "rows": int(len(panel)),
             "retained_fraction": float(len(panel) / len(raw)),
         },
-        "defects": section_defects(raw),
+        "defects": section_defects(raw_original, raw),
         "concealment": section_concealment(raw),
         "satisfaction_task": section_satisfaction(panel),
     }
