@@ -16,6 +16,7 @@ warnings.filterwarnings("ignore")
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / "results" / "cache"
 REJECTED = "NOT SUPPORTED"
+MIN_WITHIN_ENTITY_VARIATION = 1.5
 
 
 def fetch(entry: dict) -> pd.DataFrame | None:
@@ -37,16 +38,23 @@ def fetch(entry: dict) -> pd.DataFrame | None:
 
 
 def corrupt(df: pd.DataFrame, entity_col: str, time_col: str) -> pd.DataFrame | None:
-    sort_on = next(
-        (c for c in df.columns
-         if c not in (entity_col, time_col) and pd.api.types.is_numeric_dtype(df[c])),
-        None,
-    )
-    if sort_on is None:
+    candidates = [
+        c for c in df.columns
+        if c not in (entity_col, time_col) and pd.api.types.is_numeric_dtype(df[c])
+    ]
+    varying = [
+        c for c in candidates
+        if df.groupby(entity_col)[c].nunique().mean() >= MIN_WITHIN_ENTITY_VARIATION
+    ]
+    if not varying:
         return None
 
+    sort_on = max(varying, key=lambda c: df.groupby(entity_col)[c].nunique().mean())
     out = df.sort_values([time_col, sort_on]).reset_index(drop=True)
     out["position_id"] = out.groupby(time_col).cumcount()
+
+    if out.groupby("position_id")[entity_col].nunique().eq(1).mean() > 0.5:
+        return None
     return out.drop(columns=[entity_col])
 
 
