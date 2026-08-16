@@ -1,0 +1,33 @@
+{
+  "title": "Analysis code and manuscript: entity-linkage failure in longitudinal health data",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "creators": [
+    {
+      "name": "Imran, Muhammad Umer",
+      "affiliation": "School of Medicine, Nanchang University"
+    }
+  ],
+  "keywords": [
+    "panel data",
+    "longitudinal data",
+    "data leakage",
+    "entity resolution",
+    "reproducibility",
+    "health informatics"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/stemmatics/paneldx",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://pypi.org/project/paneldx",
+      "relation": "requires",
+      "scheme": "url"
+    }
+  ],
+  "description": "Analysis code, intermediate results and manuscript for a study of entity-linkage failure in panel data. Reproduces every quantitative claim in the accompanying manuscript. No data is distributed: the physician panel contains attributes inferred from photographs of identifiable individuals."
+}

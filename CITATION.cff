@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+title: >-
+  Entity-linkage failure in longitudinal health data: analysis code and
+  manuscript
+message: >-
+  If you use this material, please cite the manuscript. If you use the
+  validation method itself, please cite the paneldx software.
+type: software
+authors:
+  - family-names: Imran
+    given-names: Muhammad Umer
+    affiliation: School of Medicine, Nanchang University
+    email: umer@3dex.com
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+doi: 10.5281/zenodo.22086703
+repository-code: "https://github.com/stemmatics/paneldx-paper"
+version: 1.0.2
+license: Apache-2.0
+abstract: >-
+  Analysis code, intermediate results and manuscript for a study of
+  entity-linkage failure in panel data. A longitudinal dataset asserts that
+  rows sharing an identifier describe the same entity observed repeatedly
+  over time; where that assertion is false, within-entity analysis is
+  invalidated without any error being raised. The study characterises the
+  defect, evaluates an automated test across 63 public longitudinal
+  datasets, and reports a case study in which the defect suppressed the
+  naive baseline that would otherwise have exposed it.
+keywords:
+  - panel data
+  - longitudinal data
+  - data leakage
+  - entity resolution
+  - reproducibility
+  - health informatics
+references:
+  - type: software
+    title: "paneldx: validating the structural integrity of longitudinal datasets"
+    authors:
+      - family-names: Imran
+        given-names: Muhammad Umer
+    doi: 10.5281/zenodo.22086706
+    repository-code: "https://github.com/stemmatics/paneldx"
+    license: Apache-2.0
+    version: 0.3.1
