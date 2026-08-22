@@ -4,7 +4,7 @@
 %% Upload this folder to Overleaf and it builds without installing anything.
 %% The generated PDF is what Elsevier's system expects at submission.
 
-\documentclass[11pt,a4paper]{article}
+\documentclass[preprint,12pt,authoryear]{elsarticle}
 
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -12,6 +12,7 @@
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 
+\journal{Computer Methods and Programs in Biomedicine}
 
 \begin{document}
 
@@ -26,7 +27,7 @@ defect class and an open-source validation tool}
 \address[nchu]{School of Medicine, Nanchang University, Nanchang, Jiangxi, China}
 
 \begin{abstract}
-A longitudinal dataset asserts that rows
+\textbf{Background and Objective:} A longitudinal dataset asserts that rows
 sharing an identifier describe the same entity observed repeatedly over time.
 Analyses depend on this assertion continuously, through lags, first differences,
 trajectories, sequence models and entity-grouped cross-validation, yet it is
@@ -71,6 +72,10 @@ baseline alone offers insufficient protection, and key validity should be
 established first.
 \end{abstract}
 
+\begin{keyword}
+panel data \sep longitudinal data \sep data leakage \sep entity resolution \sep
+reproducibility \sep health informatics
+\end{keyword}
 
 \end{frontmatter}
 
@@ -565,6 +570,37 @@ believed adequate was 2.9 times worse than carrying the last value forward.
 Validation of the entity key should precede any within-entity analysis of panel
 data, and naive baselines should be reported only after that validation has
 passed.
+
+\section*{CRediT authorship contribution statement}
+
+\textbf{Muhammad Umer Imran:} Conceptualization, Methodology, Software, Formal
+analysis, Investigation, Data curation, Writing (original draft), Writing
+(review and editing), Visualization.
+
+\section*{Declaration of competing interest}
+
+The author declares no known competing financial interests or personal
+relationships that could have appeared to influence the work reported in this
+paper.
+
+\section*{Data availability}
+
+The software is available at \url{https://github.com/stemmatics/paneldx} under
+Apache-2.0, installable from PyPI as \texttt{paneldx}, and archived at
+\url{https://doi.org/10.5281/zenodo.22086706}. Analysis code reproducing every
+quantitative claim, together with the intermediate results underlying every
+figure and table, is available at
+\url{https://github.com/stemmatics/paneldx-paper} and archived at
+\url{https://doi.org/10.5281/zenodo.22086703}. The 63 evaluation datasets are
+public and retrievable from the Rdatasets collection \cite{arel2018}. The
+physician panel is not redistributed, since it contains attributes inferred from
+photographs of identifiable individuals; the analysis code accepts a path to a
+local copy.
+
+\section*{Funding}
+
+This research received no specific grant from funding agencies in the public,
+commercial or not-for-profit sectors.
 
 \begin{thebibliography}{9}
 
