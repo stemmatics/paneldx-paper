@@ -9,7 +9,7 @@ type: software
 authors:
   - family-names: Imran
     given-names: Muhammad Umer
-    affiliation: School of Medicine, Nanchang University
+    affiliation: Clinical Medicine, Nanchang University; 3Dex Inc.
     email: umer@3dex.com
     # orcid: "https://orcid.org/0000-0000-0000-0000"
 doi: 10.5281/zenodo.22086703
