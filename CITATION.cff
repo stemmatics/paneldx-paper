@@ -14,7 +14,7 @@ authors:
     # orcid: "https://orcid.org/0000-0000-0000-0000"
 doi: 10.5281/zenodo.22086703
 repository-code: "https://github.com/stemmatics/paneldx-paper"
-version: 1.0.2
+version: 1.0.3
 license: Apache-2.0
 abstract: >-
   Analysis code, intermediate results and manuscript for a study of

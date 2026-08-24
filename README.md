@@ -84,7 +84,7 @@ See [CITATION.cff](CITATION.cff), or use GitHub's "Cite this repository" button.
 | What | DOI |
 |---|---|
 | This archive, all versions | [10.5281/zenodo.22086703](https://doi.org/10.5281/zenodo.22086703) |
-| This archive, v1.0.2 | [10.5281/zenodo.22087095](https://doi.org/10.5281/zenodo.22087095) |
+| This archive, v1.0.3 | [10.5281/zenodo.22087177](https://doi.org/10.5281/zenodo.22087177) |
 | The paneldx software | [10.5281/zenodo.22086706](https://doi.org/10.5281/zenodo.22086706) |
 
 Cite the manuscript for the study and the software for the method. Use the
