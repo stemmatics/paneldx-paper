@@ -4,13 +4,22 @@
 %% Upload this folder to Overleaf and it builds without installing anything.
 %% The generated PDF is what Elsevier's system expects at submission.
 
-\documentclass[preprint,12pt,authoryear]{elsarticle}
+\documentclass[preprint,12pt]{elsarticle}
 
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{amsmath}
 \usepackage{url}
+\usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
+
+\makeatletter
+\pdfstringdefDisableCommands{%
+  \let\corref\@gobble
+  \let\fnref\@gobble
+  \let\tnoteref\@gobble
+}
+\makeatother
 
 \journal{Computer Methods and Programs in Biomedicine}
 
@@ -460,12 +469,13 @@ The central methodological finding is that these defects concealed one another.
 \centering
 \caption{The same carry-forward baseline scored under each entity key.}
 \label{tab:concealment}
+\small
 \begin{tabular}{lrrl}
 \toprule
-Entity key & Baseline MAE & Baseline $R^2$ & Apparent conclusion \\
+Entity key & MAE & $R^2$ & Apparent conclusion \\
 \midrule
-Positional, as used & 0.4717 & 0.191 & The baseline is uninformative \\
-Recovered & 0.0320 & 0.971 & The baseline beats the model 2.9-fold \\
+Positional, as used & 0.4717 & 0.191 & Baseline is uninformative \\
+Recovered & 0.0320 & 0.971 & Baseline beats the model 2.9-fold \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -575,6 +585,7 @@ passed.
 
 \section*{CRediT authorship contribution statement}
 
+\sloppy
 \textbf{Muhammad Umer Imran:} Conceptualization, Methodology, Software, Formal
 analysis, Investigation, Data curation, Writing (original draft), Writing
 (review and editing), Visualization.
@@ -586,6 +597,8 @@ relationships that could have appeared to influence the work reported in this
 paper.
 
 \section*{Data availability}
+
+\sloppy
 
 The software is available at \url{https://github.com/stemmatics/paneldx} under
 Apache-2.0, installable from PyPI as \texttt{paneldx}, and archived at
